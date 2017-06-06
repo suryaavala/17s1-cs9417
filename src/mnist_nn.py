@@ -101,5 +101,5 @@ print("test accuracy %g"%accuracy.eval(feed_dict={
 
 #saving the nn
 saver = tf.train.Saver()
-save_path = saver.save(sess, "/modle/model.ckpt")
+save_path = saver.save(sess, "./model/model.ckpt")
 print("Model saved in file: %s" % save_path)
