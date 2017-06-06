@@ -98,3 +98,8 @@ print("test accuracy %g"%accuracy.eval(feed_dict={
     x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
 
 #test accuracy 0.9918
+
+#saving the nn
+saver = tf.train.Saver()
+save_path = saver.save(sess, "/modle/model.ckpt")
+print("Model saved in file: %s" % save_path)
