@@ -19,7 +19,7 @@ y_ = tf.placeholder(tf.float32, [None, 10])
 
 #train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
 
-sess = tf.InteractiveSession()
+
 
 #tf.global_variables_initializer().run()
 
@@ -85,21 +85,33 @@ cross_entropy = tf.reduce_mean(
 train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
 correct_prediction = tf.equal(tf.argmax(y_conv,1), tf.argmax(y_,1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-sess.run(tf.global_variables_initializer())
-for i in range(30000):
-  batch = mnist.train.next_batch(50)
-  if i%100 == 0:
-    train_accuracy = accuracy.eval(feed_dict={
-        x:batch[0], y_: batch[1], keep_prob: 1.0})
-    print("step %d, training accuracy %g"%(i, train_accuracy))
-  train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.45})
 
-print("test accuracy %g"%accuracy.eval(feed_dict={
-    x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
+def train_model():
+    sess = tf.InteractiveSession()
+    sess.run(tf.global_variables_initializer())
+    for i in range(30000):
+      batch = mnist.train.next_batch(50)
+      if i%100 == 0:
+        train_accuracy = accuracy.eval(feed_dict={
+            x:batch[0], y_: batch[1], keep_prob: 1.0})
+        print("step %d, training accuracy %g"%(i, train_accuracy))
+      train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.45})
 
-#test accuracy 0.9918
+    print("test accuracy %g"%accuracy.eval(feed_dict={
+        x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
 
-#saving the nn
+    #test accuracy 0.9918
+
+    #saving the nn
+    saver = tf.train.Saver()
+    save_path = saver.save(sess, "./model75/model.ckpt")
+    print("Model saved in file: %s" % save_path)
+    return
+
 saver = tf.train.Saver()
-save_path = saver.save(sess, "./model75/model.ckpt")
-print("Model saved in file: %s" % save_path)
+#restore
+with tf.Session() as sess:
+  # Restore variables from disk.
+  saver.restore(sess, "./model75/model.ckpt")
+  print("Model restored.")
+  sess.close()
