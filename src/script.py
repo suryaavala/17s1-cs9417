@@ -50,8 +50,8 @@ def display(img):
     # (784) => (28,28)
     one_image = img.reshape(image_width,image_height)
 
-    plt.axis('off')
-    plt.imshow(one_image, cmap=cm.binary)
+    #plt.axis('off')
+    #plt.imshow(one_image, cmap=cm.binary)
 
 # output image
 display(images[IMAGE_TO_DISPLAY])
@@ -284,13 +284,13 @@ if(VALIDATION_SIZE):
                                                    y_: validation_labels,
                                                    keep_prob: 1.0})
     print('validation_accuracy => %.4f'%validation_accuracy)
-    plt.plot(x_range, train_accuracies,'-b', label='Training')
-    plt.plot(x_range, validation_accuracies,'-g', label='Validation')
-    plt.legend(loc='lower right', frameon=False)
-    plt.ylim(ymax = 1.1, ymin = 0.7)
-    plt.ylabel('accuracy')
-    plt.xlabel('step')
-    plt.show()
+    #plt.plot(x_range, train_accuracies,'-b', label='Training')
+    #plt.plot(x_range, validation_accuracies,'-g', label='Validation')
+    #plt.legend(loc='lower right', frameon=False)
+    #plt.ylim(ymax = 1.1, ymin = 0.7)
+    #plt.ylabel('accuracy')
+    #plt.xlabel('step')
+    #plt.show()
 
 # read test data from CSV file
 test_images = pd.read_csv('../input/test.csv').values
@@ -327,7 +327,7 @@ np.savetxt('submission_softmax.csv',
            fmt='%d')
 
 layer1_grid = layer1.eval(feed_dict={x: test_images[IMAGE_TO_DISPLAY:IMAGE_TO_DISPLAY+1], keep_prob: 1.0})
-plt.axis('off')
-plt.imshow(layer1_grid[0], cmap=cm.seismic )
+#plt.axis('off')
+#plt.imshow(layer1_grid[0], cmap=cm.seismic )
 
 sess.close()
