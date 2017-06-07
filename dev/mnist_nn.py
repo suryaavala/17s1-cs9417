@@ -1,8 +1,10 @@
-from tensorflow.examples.tutorials.mnist import input_data
+#from tensorflow.examples.tutorials.mnist import input_data
 
-mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
+#mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
 import tensorflow as tf
+import pandas as pd
+import numpy as np
 
 x = tf.placeholder(tf.float32,[None, 784])
 
@@ -111,7 +113,25 @@ def train_model():
 saver = tf.train.Saver()
 #restore
 with tf.Session() as sess:
-  # Restore variables from disk.
-  saver.restore(sess, "./model75/model.ckpt")
-  print("Model restored.")
-  sess.close()
+    # Restore variables from disk.
+    saver.restore(sess, "./model75/model.ckpt")
+    print("Model restored.")
+
+    predict = tf.argmax(y_conv,1)
+    # read test data from CSV file
+    test_images = pd.read_csv('../src/data/test.csv').values
+    test_images = test_images.astype(np.float)
+    print('test_images({0[0]},{0[1]})'.format(test_images.shape))
+    # using batches is more resource efficient
+    predicted_lables = np.zeros(test_images.shape[0])
+    for i in range(0,test_images.shape[0]//100):
+        predicted_lables[i*100 : (i+1)*100] = predict.eval(feed_dict={x: test_images[i*100 : (i+1)*100],keep_prob: 1.0})
+
+    print('predicted_lables({0})'.format(len(predicted_lables)))
+
+    # save results
+    np.savetxt('submission_softmax.csv',np.c_[range(1,len(test_images)+1),predicted_lables], delimiter=',', header = 'ImageId,Label', comments = '', fmt='%d')
+
+
+
+    sess.close()
