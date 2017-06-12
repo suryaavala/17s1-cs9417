@@ -1,7 +1,3 @@
-#from tensorflow.examples.tutorials.mnist import input_data
-
-#mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
-
 import tensorflow as tf
 import pandas as pd
 import numpy as np
@@ -109,8 +105,16 @@ if train_model:
     '''
     Training the model
     '''
+    #NOTE Downloading the dataset
+    print("Extracting data from yann.lecun.com/exdb/mnist/")
+    from tensorflow.examples.tutorials.mnist import input_data
+    mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
+    print("Data extracted")
+
+    #Running the session
     sess = tf.InteractiveSession()
     sess.run(tf.global_variables_initializer())
+    #training the model
     for i in range(30000):
       batch = mnist.train.next_batch(50)
       if i%100 == 0:
