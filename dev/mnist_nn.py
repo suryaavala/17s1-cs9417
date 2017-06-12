@@ -141,7 +141,7 @@ else:
 
         predict = tf.argmax(y_conv,1)
         # read test data from CSV file
-        test_images = pd.read_csv('../src/data/test.csv').values
+        test_images = pd.read_csv('./data/test.csv').values
         test_images = test_images.astype(np.float)
         print('test_images({0[0]},{0[1]})'.format(test_images.shape))
         # using batches is more resource efficient
