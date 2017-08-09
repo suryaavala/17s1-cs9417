@@ -46,7 +46,7 @@ Once the dependencies are installed, clone this github repository onto your loca
 git clone git@github.com:suryaavala/17s1-cs9417.git
 ```
 
-Then cd into the cloned directory 
+Then cd into the cloned directory
 
 ```
 cd 17s1-cs9417
@@ -65,13 +65,13 @@ python3 mnist_nn.py
 Expected output
 ```
 You did not run the program as designed
-Please run the program again as follows(case sensitive Train!=train): 
+Please run the program again as follows(case sensitive Train!=train):
 python3 mnist_nn.py train/predict
 Exiting the program...
 ```
 If you see the above output, then the installation is successful
 
-## Running 
+## Running
 
 The code can be run to either Train the classifier or to Predict the results using the pretrained classifier
 
@@ -133,7 +133,7 @@ Model saved in file: ./model/model.ckpt
 ```
 ### Predict
 
-Inorder to predict the labels using create a csv like this [test.csv](https://www.kaggle.com/c/digit-recognizer/data) and place it in 
+Inorder to predict the labels using create a csv like this [test.csv](https://www.kaggle.com/c/digit-recognizer/data) and place it in
 ```
 17s1-cs9417/code/data
 ```
@@ -142,14 +142,14 @@ And then run the following command
 ```
 python3 mnist_nn.py predict
 ```
-Predicted results will be saved in 
+Predicted results will be saved in
 ```
 17s1-cs9417/submission_softmax.csv
 ```
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/suryaavala/17s1-cs9417/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/suryaavala/17s1-cs9417/tags).
 
 ## Authors
 
@@ -167,3 +167,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * [Martin Görner](https://twitter.com/martin_gorner)
 
 
+##### < / > With :heart: Using [Python](https://www.python.org/) and [Tensorflow](https://www.tensorflow.org/)
