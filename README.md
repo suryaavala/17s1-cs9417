@@ -1,5 +1,40 @@
-# 17s1-cs9417 Assignment 2
+# MNIST
 This github repo is created as a part of the [Assignment 2](http://www.cse.unsw.edu.au/~mike/comp9417/ass2_proj.html/) of [COMP9417 Machine Learning and Data Mining](http://www.cse.unsw.edu.au/~cs9417) taught at [Unviersity of New South Wales](https://www.unsw.edu.au)
+
+## Overview
+The MNIST Data
+Hand digit recognition has been a Hello, World! to Deep Learning. It is extremely easy and simple to get started with it and to build a classifier with a 90% accuracy. At the same time, MNIST problem can also be used to dive deeper into advanced Deep Learning concepts such as Convolutional Neural Networks, learning rate, dropouts and batch normalisation. The world record for the MNIST data is at about 99.6% accuracy and the model I have trained should give an accuracy around ~99.5%.
+
+The MNIST data is hosted on Yann LeCun's website. 
+
+The MNIST data is split into three parts: 55,000 data points of training data (mnist.train), 10,000 points of test data (mnist.test), and 5,000 points of validation data (mnist.validation). This split is very important: it's essential in machine learning that we have separate data which we don't learn from so that we can make sure that what we've learned actually generalizes!
+
+As mentioned earlier, every MNIST data point has two parts: an image of a handwritten digit and a corresponding label. We'll call the images "x" and the labels "y". Both the training set and test set contain images and their corresponding labels; for example the training images are mnist.train.images and the training labels are mnist.train.labels.
+
+Each image is 28 pixels by 28 pixels. We can interpret this as a big array of numbers:
+
+![alt text](https://www.tensorflow.org/images/MNIST-Matrix.png)
+
+
+
+We can flatten this array into a vector of 28x28 = 784 numbers. It doesn't matter how we flatten the array, as long as we're consistent between images. From this perspective, the MNIST images are just a bunch of points in a 784-dimensional vector space, with a very rich structure (warning: computationally intensive visualizations).
+
+Flattening the data throws away information about the 2D structure of the image. Isn't that bad? Well, the best computer vision methods do exploit this structure, and we will in later tutorials. But the simple method we will be using here, a softmax regression (defined below), won't.
+
+The result is that mnist.train.images is a tensor (an n-dimensional array) with a shape of [55000, 784]. The first dimension is an index into the list of images and the second dimension is the index for each pixel in each image. Each entry in the tensor is a pixel intensity between 0 and 1, for a particular pixel in a particular image.
+
+![alt text](https://www.tensorflow.org/images/mnist-train-xs.png)
+
+Each image in MNIST has a corresponding label, a number between 0 and 9 representing the digit drawn in the image.
+
+For the purposes of this tutorial, we're going to want our labels as "one-hot vectors". A one-hot vector is a vector which is 0 in most dimensions, and 1 in a single dimension. In this case, the nth digit will be represented as a vector which is 1 in the nth dimension. For example, 3 would be [0,0,0,1,0,0,0,0,0,0]. Consequently, mnist.train.labels is a [55000, 10] array of floats.
+
+![a;t text](https://www.tensorflow.org/images/mnist-train-ys.png)
+
+We're now ready to actually make our model! [Tensorflow Turotial](https://www.tensorflow.org/get_started/mnist/beginners)
+
+
+
 
 ## Getting Started
 
@@ -165,6 +200,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * [Tensorflow](https://tensorflow.org)
 * [Martin Görner](https://twitter.com/martin_gorner)
+* [Tensorflow Turotial](https://www.tensorflow.org/get_started/mnist/beginners)
 
 
 ##### < / > With :heart: Using [Python](https://www.python.org/) and [Tensorflow](https://www.tensorflow.org/)
